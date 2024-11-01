@@ -12,7 +12,7 @@ document.getElementById("register").addEventListener("click", () => {
     email: registerEmail.value,
     password: registerPassword.value,
   };
-  fetch("https://weatherapp-backend-amber-sigma.vercel.app/users/signup", {
+  fetch("https://weatherapp-backend-kappa-seven.vercel.app/users/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(register),
@@ -33,7 +33,7 @@ document.getElementById("connection").addEventListener("click", () => {
     email: connectionEmail.value,
     password: connectionPassword.value,
   };
-  fetch("https://weatherapp-backend-amber-sigma.vercel.app/users/signin", {
+  fetch("https://weatherapp-backend-kappa-seven.vercel.app/users/signin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(connection),
