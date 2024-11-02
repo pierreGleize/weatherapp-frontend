@@ -1,3 +1,18 @@
+const userConnect = JSON.parse(localStorage.getItem("userConnect"));
+const newUser = JSON.parse(localStorage.getItem("newUser"));
+
+console.log(newUser.newUser.name);
+
+if (newUser.result) {
+  document.getElementById(
+    "userName"
+  ).innerHTML = `Welcome ${newUser.newUser.name}`;
+}
+// if (userConnect.result) {
+//   document.getElementById(
+//     "userName"
+//   ).innerHTML = `Welcome back ${userConnect.user.name}`;
+// }
 fetch("https://weatherapp-backend-kappa-seven.vercel.app/weather")
   .then((response) => response.json())
   .then((data) => {

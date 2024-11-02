@@ -24,6 +24,7 @@ document.getElementById("register").addEventListener("click", () => {
       registerPassword.value = "";
       if (data.result) {
         window.location.assign("index.html");
+        localStorage.setItem("newUser", JSON.stringify(data));
       }
     });
 });
@@ -44,6 +45,7 @@ document.getElementById("connection").addEventListener("click", () => {
       connectionEmail.value = "";
       connectionPassword.value = "";
       if (data.result) {
+        localStorage.setItem("userConnect", JSON.stringify(data));
         window.location.assign("index.html");
       }
     });
