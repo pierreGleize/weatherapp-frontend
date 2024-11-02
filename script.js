@@ -5,7 +5,7 @@ const userNameElement = document.getElementById("userName");
 const userConnectDate = JSON.parse(localStorage.getItem("userConnectDate"));
 const newUserDate = JSON.parse(localStorage.getItem("newUserDate"));
 
-if (newUser && userConnect) {
+if (newUser || userConnect) {
   if (newUserDate > userConnectDate) {
     userNameElement.style.display = "flex";
     userNameElement.innerHTML = `Welcome ${newUser.newUser.name}`;
