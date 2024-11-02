@@ -2,48 +2,54 @@ fetch("https://weatherapp-backend-kappa-seven.vercel.app/weather")
   .then((response) => response.json())
   .then((data) => {
     if (data.weather) {
-      for (let i = 0; i < data.weather.length; i++) {
+      data.weather.forEach((element) => {
         document.querySelector("#cityList").innerHTML += `
 				<div class="cityContainer">
-				<p class="name">${data.weather[i].cityName}</p>
-				<p class="description">${data.weather[i].description}</p>
-				<img class="weatherIcon" src="images/${data.weather[i].main}.png"/>
+				<p class="name">${element.cityName}</p>
+				<p class="description">${element.description}</p>
+				<img class="weatherIcon" src="images/${element.main}.png"/>
 				<div class="temperature">
-					<p class="tempMin">${data.weather[i].tempMin}°C</p>
+					<p class="tempMin">${element.tempMin}°C</p>
 					<span>-</span>
-					<p class="tempMax">${data.weather[i].tempMax}°C</p>
+					<p class="tempMax">${element.tempMax}°C</p>
 				</div>
-				<button class="deleteCity" id="${data.weather[i].cityName}">Delete</button>
+				<button class="deleteCity" id="${element.cityName}">Delete</button>
 			</div>
 			`;
-      }
-      updateDeleteCityEventListener();
+      });
+      deleteCity();
     }
   });
 
-function updateDeleteCityEventListener() {
-  for (let i = 0; i < document.querySelectorAll(".deleteCity").length; i++) {
-    document
-      .querySelectorAll(".deleteCity")
-      [i].addEventListener("click", function () {
-        fetch(
-          `https://weatherapp-backend-kappa-seven.vercel.app/weather/${this.id}`,
-          { method: "DELETE" }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.result) {
-              this.parentNode.remove();
-            }
-          });
-      });
-  }
+function deleteCity() {
+  const deleteCity = document.querySelectorAll(".deleteCity");
+  deleteCity.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      console.log(event.target);
+      const cityName = event.target.id;
+      fetch(
+        `https://weatherapp-backend-kappa-seven.vercel.app/weather/${cityName}`,
+        {
+          method: "DELETE",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            element.parentNode.remove();
+          }
+        });
+    });
+  });
 }
 
 document.querySelector("#addCity").addEventListener("click", function () {
-  const cityName = document.querySelector("#cityNameInput").value;
+  const cityNameInput = document.querySelector("#cityNameInput").value;
+  const cityName =
+    cityNameInput.charAt().toUpperCase() +
+    cityNameInput.split("").splice(1).join("");
 
-  fetch("http://localhost:3000/weather", {
+  fetch("https://weatherapp-backend-kappa-seven.vercel.app/weather", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ cityName }),
@@ -64,7 +70,7 @@ document.querySelector("#addCity").addEventListener("click", function () {
 				<button class="deleteCity" id="${data.weather.cityName}">Delete</button>
 			</div>
 					`;
-        updateDeleteCityEventListener();
+        deleteCity();
         document.querySelector("#cityNameInput").value = "";
       }
     });
