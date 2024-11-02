@@ -155,3 +155,11 @@ button {
 	background-color: transparent;
 	border: none;
 }
+#userName{
+	display: none;
+	margin-right: 10px;
+}
+#header-right{
+	display: flex;
+	align-items: center;
+}

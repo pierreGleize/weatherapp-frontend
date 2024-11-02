@@ -23,8 +23,10 @@ document.getElementById("register").addEventListener("click", () => {
       registerEmail.value = "";
       registerPassword.value = "";
       if (data.result) {
+        const date = new Date();
         window.location.assign("index.html");
         localStorage.setItem("newUser", JSON.stringify(data));
+        localStorage.setItem("newUserDate", JSON.stringify(date));
       }
     });
 });
@@ -45,7 +47,9 @@ document.getElementById("connection").addEventListener("click", () => {
       connectionEmail.value = "";
       connectionPassword.value = "";
       if (data.result) {
+        const date = new Date();
         localStorage.setItem("userConnect", JSON.stringify(data));
+        localStorage.setItem("userConnectDate", JSON.stringify(date));
         window.location.assign("index.html");
       }
     });
