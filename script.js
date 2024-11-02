@@ -5,7 +5,8 @@ const userNameElement = document.getElementById("userName");
 const userConnectDate = JSON.parse(localStorage.getItem("userConnectDate"));
 const newUserDate = JSON.parse(localStorage.getItem("newUserDate"));
 
-if (newUser || userConnect) {
+if (newUser && userConnect) {
+  deconnection();
   if (newUserDate > userConnectDate) {
     userNameElement.style.display = "flex";
     userNameElement.innerHTML = `Welcome ${newUser.newUser.name}`;
@@ -14,13 +15,25 @@ if (newUser || userConnect) {
     userNameElement.innerHTML = `Welcome back ${userConnect.user.name}`;
   }
 } else if (newUser) {
+  deconnection("newUser", "newUserDate");
   userNameElement.style.display = "flex";
-  userNameElement.innerHTML = `Welcome ${newUser.user.name}`;
+  userNameElement.innerHTML = `Welcome ${newUser.newUser.name}`;
 } else if (userConnect) {
+  deconnection("userConnect", "userConnectDate");
   userNameElement.style.display = "flex";
   userNameElement.innerHTML = `Welcome back ${userConnect.user.name}`;
 } else {
-  userNameElement.style.display = "none";
+  Logout.style.display = "none";
+}
+function deconnection(user, date) {
+  const Logout = document.getElementById("Logout");
+  Logout.style.display = "flex";
+  Logout.addEventListener("click", () => {
+    localStorage.removeItem(user);
+    localStorage.removeItem(date);
+    userNameElement.innerHTML = "";
+    Logout.style.display = "none";
+  });
 }
 
 fetch("https://weatherapp-backend-kappa-seven.vercel.app/weather")
@@ -68,7 +81,7 @@ function deleteCity() {
   });
 }
 
-document.querySelector("#addCity").addEventListener("click", function () {
+document.querySelector("#addCity").addEventListener("click", () => {
   const cityNameInput = document.querySelector("#cityNameInput").value;
   const cityName =
     cityNameInput.charAt().toUpperCase() +
