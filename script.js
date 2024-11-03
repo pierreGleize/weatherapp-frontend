@@ -31,6 +31,7 @@ function deconnection(user, date) {
   Logout.addEventListener("click", () => {
     localStorage.removeItem(user);
     localStorage.removeItem(date);
+    localStorage.clear();
     userNameElement.innerHTML = "";
     Logout.style.display = "none";
   });

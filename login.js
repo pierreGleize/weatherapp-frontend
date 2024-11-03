@@ -43,7 +43,6 @@ document.getElementById("connection").addEventListener("click", () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       connectionEmail.value = "";
       connectionPassword.value = "";
       if (data.result) {
