@@ -63,7 +63,6 @@ function deleteCity() {
   const deleteCity = document.querySelectorAll(".deleteCity");
   deleteCity.forEach((element) => {
     element.addEventListener("click", (event) => {
-      console.log(event.target);
       const cityName = event.target.id;
       fetch(
         `https://weatherapp-backend-kappa-seven.vercel.app/weather/${cityName}`,
