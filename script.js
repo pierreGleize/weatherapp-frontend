@@ -15,22 +15,18 @@ if (newUser && userConnect) {
     userNameElement.innerHTML = `Welcome back ${userConnect.user.name}`;
   }
 } else if (newUser) {
-  deconnection("newUser", "newUserDate");
+  deconnection();
   userNameElement.style.display = "flex";
   userNameElement.innerHTML = `Welcome ${newUser.newUser.name}`;
 } else if (userConnect) {
-  deconnection("userConnect", "userConnectDate");
+  deconnection();
   userNameElement.style.display = "flex";
   userNameElement.innerHTML = `Welcome back ${userConnect.user.name}`;
-} else {
-  Logout.style.display = "none";
 }
-function deconnection(user, date) {
+function deconnection() {
   const Logout = document.getElementById("Logout");
   Logout.style.display = "flex";
   Logout.addEventListener("click", () => {
-    localStorage.removeItem(user);
-    localStorage.removeItem(date);
     localStorage.clear();
     userNameElement.innerHTML = "";
     Logout.style.display = "none";
